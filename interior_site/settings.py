@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-)8faak!7l%)a25*xnah%&53x-3o!c3xc&-fc@ln_pvotz8qsoo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["Lucky_interior.onrender.com"]
 
 env = environ.Env()
 # .env file ko read karne ke liye:
