@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url # Top par import karein
+import os
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +27,13 @@ SECRET_KEY = 'django-insecure-)8faak!7l%)a25*xnah%&53x-3o!c3xc&-fc@ln_pvotz8qsoo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+env = environ.Env()
+# .env file ko read karne ke liye:
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=False)
 
 # Application definition
 
@@ -36,13 +43,20 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+      'cloudinary',
     "main",
     'corsheaders',   # Frontend se request allow karne ke liye
     'rest_framework',
     'rest_framework.authtoken',
-
+  
 ]
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET'),
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # must be top
@@ -80,11 +94,15 @@ WSGI_APPLICATION = 'interior_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Yahan apna Neon wala connection string paste karein
+       default=env('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
@@ -129,8 +147,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
-
+# Media files ka rasta badlein
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 import os
 
 MEDIA_URL = '/media/'

@@ -1,0 +1,20 @@
+# Environment Variables (Security)
+.env
+
+# Python specific
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# Databases (Local ones)
+db.sqlite3
+
+# Media & Static (Optional, agar aap cloud use kar rahe ho)
+media/
+staticfiles/
+
+# OS specific
+.DS_Store
