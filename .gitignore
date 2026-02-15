@@ -3,6 +3,7 @@
 
 # Python specific
 node_modules/
+gunicorn
 __pycache__/
 *.py[cod]
 *$py.class
