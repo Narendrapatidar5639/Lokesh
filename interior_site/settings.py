@@ -148,12 +148,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # Media files ka rasta badlein
+# settings.py mein purani lines delete karke ye dalein:
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "cloudinary_storage.storage.StaticCloudinaryStorage",
     },
 }
 import os
