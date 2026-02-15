@@ -149,6 +149,7 @@ STATIC_URL = 'static/'
 
 # Media files ka rasta badlein
 # settings.py mein purani lines delete karke ye dalein:
+# Purani lines delete karke ye dalo (Django 4.2 aur 6.0 ke liye yahi sahi hai)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
