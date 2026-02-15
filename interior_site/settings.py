@@ -18,14 +18,15 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
+    'cloudinary_storage', # Cloudinary must be before staticfiles
+    'django.contrib.staticfiles',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage', # Cloudinary must be before staticfiles
-    'django.contrib.staticfiles',
-    'cloudinary',
+    
     'main',
     'corsheaders',
     'rest_framework',
